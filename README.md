@@ -12,12 +12,14 @@ google.com
 www.w3schools.com
 stackoverflow.com,
 developer.mozilla.org
-Bootsrap
+Bootstrap
 Font Awesome
 
 
 Website
 
+## Screenshots
+![Screenshot 1](./assets/img/workdayschedule.png)
 
 Contribution
 Made with ❤ by Sherol A
