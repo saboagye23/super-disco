@@ -2,7 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
-}
+} 
 
 textarea{
   background: transparent;
@@ -68,4 +68,29 @@ textarea{
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.event.current{
+  background-color: #e90c0c;
+}
+
+.event.past{
+  background-color: rgb(223, 221, 221);
+}
+
+.event.future{
+  background-color: rgb(98, 172, 13);
+}
+
+.btn i{
+  color: #fff;
+}
+
+.hour-label span{
+  min-width: 100px;
+  text-align: right;
+  display: inline-block;
+  background-color: initial;
+  border-left: none;
+  border-bottom: none;
 }

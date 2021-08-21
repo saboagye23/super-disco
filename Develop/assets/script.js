@@ -50,16 +50,16 @@ var renderSchedule =function(schedule){
 
         // determine if hour is AM or PM
         var hourSymbol = hour % 24 < 12 ? "AM":"PM";
-
+        var eColor =eventColour(hour);
         content += 
         `
-        <div class="input-group mb-3 schedule"> 
-              <div class="input-group-prepend">
+        <div class="input-group schedule"> 
+              <div class="input-group-prepend hour-label">
                 <span class="input-group-text" id="">${h12}${hourSymbol}</span>
               </div>
-              <input id="txtEvent-${hour}" type="text" value="${hourEvent.event}" class="form-control" aria-describedby="basic-addon2">
+              <input id="txtEvent-${hour}" type="text" value="${hourEvent.event}" class="form-control event ${eColor}" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" hour="${hour}"><i class="fas fa-lock"></i>
+                <button class="btn btn-info btn-outline-secondary" type="button" hour="${hour}"><i class="fas fa-lock"></i>
               </div>
             </div>
         `
@@ -67,7 +67,15 @@ var renderSchedule =function(schedule){
     $('#display-schedule').html(content);
 }
 
-
+var eventColour= function(hour){
+    var currentHour=moment().hour();
+    if (currentHour == hour)
+        return "current"
+    else if (currentHour > hour)
+        return "past"    
+    else
+        return "future"
+}
 
 $(document).ready(function(){
     displayCurrentDay();
