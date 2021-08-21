@@ -1,13 +1,13 @@
 # Work Day Scheduler Starter Code
-Purpose
+## Purpose
 A website that offers daily planning.
 
-Built With
+## Built With
 HTML
 CSS
 Javascript
 
-References used: 
+## References used: 
 google.com 
 www.w3schools.com
 stackoverflow.com,
@@ -16,10 +16,11 @@ Bootstrap
 Font Awesome
 
 
-Website
+## Website
+https://saboagye23.github.io/super-disco/
 
 ## Screenshots
 ![Screenshot 1](./assets/img/workdayschedule.png)
 
-Contribution
+## Contribution
 Made with ❤ by Sherol A

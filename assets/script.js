@@ -1,11 +1,7 @@
 //Adding Date to Header
 var displayCurrentDay=function(){
     var today = moment().format('MMMM Do YYYY');
-    console.log(today)
     $("#currentDay").append(today);
-
-    var now=parseInt(moment().format('HH'));
-    console.log(now)  
 }
 
 var getSchedule=function(){
