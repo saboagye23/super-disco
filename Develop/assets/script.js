@@ -1,13 +1,70 @@
-$(document).ready(function(){
-
-
 //Adding Date to Header
-var today = moment().format('MMMM Do YYYY');
-console.log(today)
-$("#currentDay").append(today);
+var displayCurrentDay=function(){
+    var today = moment().format('MMMM Do YYYY');
+    console.log(today)
+    $("#currentDay").append(today);
 
-var now=parseInt(moment().format('HH'));
-console.log(now)
+    var now=parseInt(moment().format('HH'));
+    console.log(now)  
+}
+
+var getSchedule=function(){
+    var schedule=JSON.parse(window.localStorage.getItem("dailySchedule")) ;
+    if (schedule==undefined){
+        schedule= generateSchedule();
+        window.localStorage.setItem("dailySchedule", JSON.stringify(schedule));
+    }
+
+    return schedule;
+}
+
+var generateSchedule=function(){
+    var schedule={};
+    for (var hour= 9; hour<=17; hour++){
+       schedule[hour]={
+            hour: hour,
+            event: ""
+        }
+    }
+    return schedule;
+}
+
+var renderSchedule =function(schedule){
+    var content = '';
+    for (const [hour, hourEvent] of Object.entries(schedule)) {
+        // convert 24 hour to 12hour
+        var h12 = hour % 12;
+
+        if(h12 === 0){
+            h12 = 12;
+        }
+
+        // determine if hour is AM or PM
+        var hourSymbol = hour % 24 < 12 ? "AM":"PM";
+
+        content += 
+        `
+        <div class="input-group mb-3"> 
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="">${h12}${hourSymbol}</span>
+              </div>
+              <input type="text" value="${hourEvent.event}" class="form-control" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-lock"></i>
+              </div>
+            </div>
+        `
+    }
+    $('#display-schedule').html(content);
+}
+
+
+$(document).ready(function(){
+    displayCurrentDay();
+    var schedule=getSchedule();
+    renderSchedule(schedule);
 })
+
+
 
 
