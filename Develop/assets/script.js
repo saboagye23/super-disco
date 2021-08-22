@@ -29,6 +29,15 @@ var generateSchedule=function(){
     return schedule;
 }
 
+var saveSchedule=function(hour, eventName){
+    var schedule= getSchedule();
+    schedule[hour]={
+        hour: hour,
+        event: eventName
+    }
+    window.localStorage.setItem("dailySchedule", JSON.stringify(schedule));
+}
+
 var renderSchedule =function(schedule){
     var content = '';
     for (const [hour, hourEvent] of Object.entries(schedule)) {
@@ -44,13 +53,13 @@ var renderSchedule =function(schedule){
 
         content += 
         `
-        <div class="input-group mb-3"> 
+        <div class="input-group mb-3 schedule"> 
               <div class="input-group-prepend">
                 <span class="input-group-text" id="">${h12}${hourSymbol}</span>
               </div>
-              <input type="text" value="${hourEvent.event}" class="form-control" aria-describedby="basic-addon2">
+              <input id="txtEvent-${hour}" type="text" value="${hourEvent.event}" class="form-control" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-lock"></i>
+                <button class="btn btn-outline-secondary" type="button" hour="${hour}"><i class="fas fa-lock"></i>
               </div>
             </div>
         `
@@ -59,10 +68,17 @@ var renderSchedule =function(schedule){
 }
 
 
+
 $(document).ready(function(){
     displayCurrentDay();
     var schedule=getSchedule();
     renderSchedule(schedule);
+
+    $(document).on("click", '.schedule button', function(e){
+        var hour = $(this).attr('hour');
+        var eventName= $(`#txtEvent-${hour}`).val();
+        saveSchedule(hour, eventName);
+    });
 })
 
 
